@@ -1,0 +1,58 @@
+= KidsArt APIs
+
+== API
+
+=== Accounts endpoint
+
+==== Create account
+    POST: /api/v1/accounts/create
+
+    parameters accepted
+      'email'       String,      *required
+      'passowrd'    String,      *required
+      'first_name'   String,      optional
+      'last_name'    String,      *requried
+
+==== Destroy account API
+    POST: /api/v1/accounts/destroy
+    parameters:
+      token:      String *required
+    results:
+      return signout and success string
+
+==== Sign In(from app's account)
+
+    POST: /api/v1/accounts/sign_in
+
+    parameters accepted
+      'email'      String,      *required
+      'password'   String,      *requried
+    results:
+      {id,user_name,email,token, auth_id,social, avatar, state, phone}
+
+
+==== Sign In(from social)
+
+    POST: /api/v1/accounts/create
+
+    parameters accepted
+      'email'         String,      *required
+      'user_name'     String,      optional
+      'token'         String,      *requried (facebook uid)
+      'social'        String,      *required(facebook, twitter, google)
+    results:
+      {id,user_name,email,token, auth_id,social, avatar, state, phone}
+
+==== Sign Out
+    POST: 'api/v1/accounts/sign_out'
+
+    parameters accepted
+    'email'      String,      *required
+
+
+==== Forgotten Password
+    GET: /api/v1/accounts/forgotten_password
+    parameters accepted
+      'email'     String,       *required
+    results:
+      email will be sent and return success string
