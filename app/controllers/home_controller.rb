@@ -24,8 +24,7 @@ class HomeController < ApplicationController
     user = User.new(email:email, password:params[:password], first_name:first_name, last_name:last_name, from_social:from_social)
     if user.save
        if sign_in(:user, user)
-        user_info={id:user.id.to_s, email:user.email,token:user.user_auth_id,social:user.from_social}
-        render :json => {:success => user_info}
+        render :json => {:success => user.info_by_json}
       else
         render json: {:failure => 'cannot login'}
       end
@@ -52,8 +51,15 @@ class HomeController < ApplicationController
       render :json => {:failure => "cannot find user"}
     end
   end
-
+  # Login API
+  # POST: /api/v1/accounts/sign_in
+  # parameters:
+  #   email:      String *required
+  #   password:   String *required
+  # results:
+  #   return user_info
   def create_session
+    if params[:social] social_sign_in(params)
     email    = params[:email]
     password = params[:password]
 
@@ -68,14 +74,19 @@ class HomeController < ApplicationController
           device.save
         end
         user = sign_in( :user, resource )
-        user_info={id:resource.id.to_s, email:resource.email,token:resource.user_auth_id, social:resource.from_social}
-        render :json => {:success => user_info}
+        render :json => {:success => user.info_by_json}
         else
           render :json => {faild: params[:password]}, :status => 401
         end
       end
    end
 
+   # LogOut API
+   # POST: /api/v1/accounts/sign_out
+   # parameters:
+   #   email:      String *required
+   # results:
+   #   return user_info
    def delete_session
     if params[:email].present?
         resource = User.find_for_database_authentication(:email => params[:email])
@@ -90,4 +101,53 @@ class HomeController < ApplicationController
        render :json => {:success => 'sign out'}
     end
   end
+  # Login API using social
+  # POST: /api/v1/accounts/social_sign_in
+  # parameters:
+  #   email:        String *required
+  #   social:       String *required
+  #   toke:         String *required
+  #   first_name:   String *required
+  #   last_name:    String *required
+  # results:
+  #   return user_info
+
+  def social_sign_in(params)
+    if params[:token].present?
+      email        = params[:email].downcase    if params[:email].present?
+      from_social  = params[:social].downcase   if params[:social].present?
+      token        = params[:token]
+      password     = params[:token][0..10]
+      first_name   = params[:first_name]
+      last_name    = params[:last_name]
+
+      user = User.any_of({:email=>email},{:user_auth_id => token}).first
+      if user.present?
+        if sign_in(:user, user)
+          render json: {:success => user.info_by_json}
+        else
+          render json: {:failure => 'cannot login'}
+        end
+      else
+          user = User.new(
+              email:email,
+              user_auth_id:token,
+              password:password,
+              first_name:first_name,
+              last_name:last_name,
+              from_social:from_social,
+              )
+        if user.save
+          if sign_in(:user, user)
+            render json: {:success => user.info_by_json}
+          else
+            render json: {:failure => 'cannot login'}
+          end
+        else
+          render :json => {:failure => user.errors.messages}
+        end
+      end
+    end
+  end
+
 end

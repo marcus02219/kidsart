@@ -48,4 +48,16 @@ class User
     User.where(:authentication_token=>token).first
   end
 
+  def info_by_json
+    user = self
+    user_info={
+      id:user.id.to_s,
+      first_name:user.first_name,
+      last_name:user.last_name,
+      email:user.email,
+      token:user.user_auth_id,
+      auth_id:user.authentication_token,
+      social:user.from_social
+    }
+  end
 end
