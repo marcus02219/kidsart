@@ -1,24 +1,22 @@
 = KidsArt APIs
 
-== API
-
-=== Accounts endpoint
+== Accounts API
 
 ==== Create account
     POST: /api/v1/accounts/create
 
     parameters accepted
       'email'       String,      *required
-      'passowrd'    String,      *required
+      'password'    String,      *required
       'first_name'   String,      optional
-      'last_name'    String,      *requried
+      'last_name'    String,     *required
 
 ==== Destroy account API
     POST: /api/v1/accounts/destroy
     parameters:
       token:      String *required
     results:
-      return signout and success string
+      return sign out and success string
 
 ==== Sign In(from app's account)
 
@@ -56,3 +54,46 @@
       'email'     String,       *required
     results:
       email will be sent and return success string
+
+== Album API
+==== Get Albums
+  GET: /api/v1/albums
+  parameters accepted
+    'token'       String,      *required
+  results
+    [{id, name, photos}, {id, name, photos}]
+==== Get Album
+  GET: /api/v1/albums/id
+  parameters accepted
+    'token'       String,      *required
+  results
+    {id, name, photos}
+==== Create Album
+    POST: /api/v1/albums
+    parameters accepted
+      'token'     String,      *required
+      'name'      String,      *required
+    results
+      {album_id}
+    ex: curl -X POST -H "Content-Type: application/json" http://localhost:3000/api/v1/albums -d '{"token":"dkzMxP9_HCfNPzV3HUz8","name":"album5"}'
+==== Upload Photo
+  POST: /api/v1/albums/upload_photo
+  parameters accepted
+    'token'       String,      *required
+    'album_id'    String,      *required
+    'photo'       File,        *required
+  results
+    {photo_id}
+  ex:
+    curl \
+      -F "token=dkzMxP9_HCfNPzV3HUz8" \
+      -F "album_id=571758f88b1fcf0de2000004" \
+      -F "photo=@/Users/marcus/Documents/me1.jpg" \
+      localhost:3000/api/v1/albums/upload_photo
+==== Get Photos
+  GET: /api/v1/albums/photos
+  parameters accepted
+    'token'       String,      *required
+    'album_id'    String,      *required
+  results
+    {id,photo}

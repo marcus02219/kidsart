@@ -44,6 +44,11 @@ class User
   acts_as_token_authenticatable
   field :authentication_token,      :type => String
 
+  has_many :albums
+
+  def name
+    [self.first_name, self.last_name].join(" ")
+  end
   def self.find_by_token(token)
     User.where(:authentication_token=>token).first
   end
@@ -60,4 +65,16 @@ class User
       social:user.from_social
     }
   end
+
+  def albums_by_json
+    album_list = [];
+    self.albums.each do |album|
+      album_list << {
+        id:album.id.to_s,
+        name:album.name,
+        photos:album.photos.map{|photo| {id:photo.id.to_s,photo:photo.photo_url}}
+      }
+    end
+  end
+
 end

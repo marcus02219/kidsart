@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+  protect_from_forgery with: :exception
+  skip_before_filter :verify_authenticity_token
   def index
   end
   # Create account API
@@ -12,6 +14,9 @@ class HomeController < ApplicationController
   # results:
   #   return created user info
   def create
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Request-Method'] = '*'
+    
     email        = params[:email].downcase    if params[:email].present?
     password     = params[:password].downcase    if params[:password].present?
     from_social  = params[:social].downcase   if params[:social].present?
@@ -23,7 +28,7 @@ class HomeController < ApplicationController
     end
     user = User.new(email:email, password:params[:password], first_name:first_name, last_name:last_name, from_social:from_social)
     if user.save
-       if sign_in(:user, user)
+      if sign_in(:user, user)
         render :json => {:success => user.info_by_json}
       else
         render json: {:failure => 'cannot login'}
@@ -59,7 +64,9 @@ class HomeController < ApplicationController
   # results:
   #   return user_info
   def create_session
-    if params[:social] social_sign_in(params)
+    if params[:social]
+      social_sign_in(params)
+    end
     email    = params[:email]
     password = params[:password]
 
@@ -68,13 +75,8 @@ class HomeController < ApplicationController
       render :json => {faild:'No Such User'}, :status => 401
     else
       if resource.valid_password?( password )
-        device = resource.devices.where( dev_id:dev_id ).first
-        if device.blank?
-          device = resource.devices.build( dev_id:dev_id, platform:platform )
-          device.save
-        end
         user = sign_in( :user, resource )
-        render :json => {:success => user.info_by_json}
+        render :json => {:success => resource.info_by_json}
         else
           render :json => {faild: params[:password]}, :status => 401
         end
@@ -112,7 +114,7 @@ class HomeController < ApplicationController
   # results:
   #   return user_info
 
-  def social_sign_in(params)
+  def social_sign_in
     if params[:token].present?
       email        = params[:email].downcase    if params[:email].present?
       from_social  = params[:social].downcase   if params[:social].present?

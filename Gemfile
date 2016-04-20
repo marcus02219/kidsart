@@ -58,8 +58,6 @@ gem 'fog'
 gem 'unf'
 #gem 'rmagick'
 gem 'mini_magick'
-
-
 gem 'devise'
 gem 'devise-bootstrap-views'
 #gem 'devise-token_authenticatable'
