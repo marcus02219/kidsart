@@ -133,3 +133,10 @@ test:
         read:
           mode: primary
         max_pool_size: 1
+production:
+  # Configure available database clients. (required)
+  clients:
+    default:
+      database: kidsart
+      hosts:
+        - localhost:27017

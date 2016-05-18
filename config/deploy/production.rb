@@ -39,23 +39,23 @@
 # limited set of options, consult the Net::SSH documentation.
 # http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start
 #
-# Global options
-# --------------
+# # Global options
+# # --------------
 #  set :ssh_options, {
-#    keys: %w(/home/rlisowski/.ssh/id_rsa),
+#    keys: %w(/home/deployer/.ssh/id_rsa),
 #    forward_agent: false,
 #    auth_methods: %w(password)
 #  }
 #
-# The server-based syntax can be used to override options:
-# ------------------------------------
-# server 'example.com',
-#   user: 'user_name',
+# # The server-based syntax can be used to override options:
+# # ------------------------------------
+# server '198.58.105.103',
+#   user: 'deployer',
 #   roles: %w{web app},
 #   ssh_options: {
-#     user: 'user_name', # overrides user setting above
-#     keys: %w(/home/user_name/.ssh/id_rsa),
+#     user: 'deployer', # overrides user setting above
+#     keys: %w(/home/deployer/.ssh/id_rsa),
 #     forward_agent: false,
-#     auth_methods: %w(publickey password)
-#     # password: 'please use keys'
+#     auth_methods: %w(publickey password),
+#     password: 'deployer'
 #   }
