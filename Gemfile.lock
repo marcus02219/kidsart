@@ -64,6 +64,8 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    airbrussh (1.0.2)
+      sshkit (>= 1.6.1, != 1.7.0)
     arel (6.0.3)
     attr_required (1.0.1)
     autoprefixer-rails (6.3.6)
@@ -87,6 +89,25 @@ GEM
     bson (3.2.6)
     builder (3.2.2)
     byebug (8.2.4)
+    capistrano (3.5.0)
+      airbrussh (>= 1.0.0)
+      capistrano-harrow
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (1.1.4)
+      capistrano (~> 3.1)
+      sshkit (~> 1.2)
+    capistrano-harrow (0.5.1)
+    capistrano-rails (1.1.6)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rvm (0.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
+    capistrano3-puma (1.2.1)
+      capistrano (~> 3.0)
+      puma (>= 2.6)
     carrierwave-mongoid (0.1.0)
       carrierwave
       mongoid
@@ -324,6 +345,9 @@ GEM
     multipart-post (2.0.0)
     mustermann19 (0.4.3)
       enumerable-lazy
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (3.1.1)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     oauth2 (1.1.0)
@@ -342,6 +366,7 @@ GEM
       omniauth (~> 1.2)
     origin (2.2.0)
     orm_adapter (0.5.0)
+    puma (3.4.0)
     rack (1.6.4)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -426,6 +451,9 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sshkit (1.10.0)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     thin (1.6.4)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -473,6 +501,11 @@ DEPENDENCIES
   aws-sdk
   bootstrap-sass
   byebug
+  capistrano
+  capistrano-bundler
+  capistrano-rails
+  capistrano-rvm
+  capistrano3-puma
   carrierwave!
   carrierwave-mongoid
   coffee-rails (~> 4.1.0)
@@ -491,6 +524,7 @@ DEPENDENCIES
   mini_magick
   mongoid!
   omniauth-facebook
+  puma
   rails (= 4.2.6)
   redis
   resque
@@ -506,5 +540,8 @@ DEPENDENCIES
   will_paginate_mongoid
   xmpp4r_facebook
 
+RUBY VERSION
+   ruby 2.2.4p230
+
 BUNDLED WITH
-   1.11.2
+   1.12.1
