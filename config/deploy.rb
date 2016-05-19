@@ -1,6 +1,6 @@
 # config valid only for current version of Capistrano
 # lock '3.5.0'
-server '198.58.105.103', roles: [:web, :app, :db], primary: true
+server '198.58.105.103', port: 22,roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'https://github.com/marcus02219/kidsart.git'
 set :application,     'kidsart'
