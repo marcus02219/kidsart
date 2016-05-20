@@ -60,9 +60,9 @@ class User
       first_name:user.first_name,
       last_name:user.last_name,
       email:user.email,
-      token:user.user_auth_id,
+      token:user.user_auth_id == nil ? "" : user.user_auth_id,
       auth_id:user.authentication_token,
-      social:user.from_social
+      social:user.from_social == nil ? "" : user.from_social
     }
   end
 
