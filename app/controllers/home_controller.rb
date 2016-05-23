@@ -16,7 +16,7 @@ class HomeController < ApplicationController
   def create
     headers['Access-Control-Allow-Origin'] = '*'
     headers['Access-Control-Request-Method'] = '*'
-    
+
     email        = params[:email].downcase    if params[:email].present?
     password     = params[:password].downcase    if params[:password].present?
     from_social  = params[:social].downcase   if params[:social].present?
