@@ -63,9 +63,10 @@
   results
     [{id, name, photos}, {id, name, photos}]
 ==== Get Album
-  GET: /api/v1/albums/id
+  GET: /api/v1/albums/get_album
   parameters accepted
     'token'       String,      *required
+    'album_id'    String,      *required
   results
     {id, name, photos}
 ==== Create Album

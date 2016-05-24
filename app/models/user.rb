@@ -75,6 +75,7 @@ class User
         photos:album.photos.map{|photo| {id:photo.id.to_s,photo:photo.photo_url}}
       }
     end
+    album_list
   end
 
 end

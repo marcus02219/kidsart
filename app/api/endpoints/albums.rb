@@ -47,15 +47,16 @@ module Endpoints
       end
 
       # Get Album
-      # GET: /api/v1/albums/album_id
+      # GET: /api/v1/albums/get_album
       # parameters:
       #   token:      String *required
+      #   album_id: String *required
       # results:
       #   return album photos
-      get '/:id' do
+      get :get_album do
         user = User.find_by_token params[:token]
         if user.present?
-            album = user.albums.find(params[:id])
+            album = user.albums.find(params[:album_id])
             {:success => {album:album.info_by_json}}
         else
           {:failure => "Please sign"}
@@ -94,7 +95,7 @@ module Endpoints
       get :photos do
         user = User.find_by_token params[:token]
         if user.present?
-            album = Album.find(params[:id])
+            album = Album.find(params[:album_id])
             {:success => {photos:album.photos.map{|photo| {id:photo.id.to_s,photo:photo.photo_url}}}}
         else
           {:failure => "Please sign"}
