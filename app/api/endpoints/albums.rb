@@ -69,6 +69,7 @@ module Endpoints
       #   token:      String *required
       #   album_id:   String *required
       #   photo:      String *required
+      #   photo_name: String optional
       # results:
       #   return album id
       post :upload_photo do
@@ -96,7 +97,7 @@ module Endpoints
         user = User.find_by_token params[:token]
         if user.present?
             album = Album.find(params[:album_id])
-            {:success => {photos:album.photos.map{|photo| {id:photo.id.to_s,photo:photo.photo_url}}}}
+            {:success => {photos:album.photos.map{|photo| photo.info_by_json}}}
         else
           {:failure => "Please sign"}
         end

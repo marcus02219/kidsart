@@ -72,7 +72,8 @@ class User
       album_list << {
         id:album.id.to_s,
         name:album.name,
-        photos:album.photos.map{|photo| {id:photo.id.to_s,photo:photo.photo_url}}
+        photos:album.photos.map{|photo| photo.info_by_json},
+        created_at:album.time
       }
     end
     album_list
