@@ -69,15 +69,15 @@ module Endpoints
       #   token:      String *required
       #   album_id:   String *required
       #   photo:      String *required
-      #   photo_name: String optional
+      #   name:       String *optional
       # results:
       #   return album id
       post :upload_photo do
         user = User.find_by_token params[:token]
         if user.present?
-          photo = Photo.new(photo:params[:photo], album_id:params[:album_id])
+          photo = Photo.new(photo:params[:photo], album_id:params[:album_id], name:params[:name])
           if photo.save()
-            {:success => {photo_id:photo.id.to_s}}
+            {:success => photo.info_by_json}
           else
             {:failure => photo.errors.messages}
           end
@@ -92,12 +92,12 @@ module Endpoints
       #   token:      String *required
       #   album_id:   String *required
       # results:
-      #   return album id
+      #   return photo_list
       get :photos do
         user = User.find_by_token params[:token]
         if user.present?
             album = Album.find(params[:album_id])
-            {:success => {photos:album.photos.map{|photo| photo.info_by_json}}}
+            {:success => album.photos.map{|photo| photo.info_by_json}}
         else
           {:failure => "Please sign"}
         end

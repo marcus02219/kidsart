@@ -68,7 +68,7 @@
     'token'       String,      *required
     'album_id'    String,      *required
   results
-    {id, name, photos}
+    {id, name, photos:{[]}}
 ==== Create Album
     POST: /api/v1/albums
     parameters accepted
@@ -83,12 +83,14 @@
     'token'       String,      *required
     'album_id'    String,      *required
     'photo'       File,        *required
+    'name'        String,        *required
   results
     {photo_id}
   ex:
     curl \
-      -F "token=dkzMxP9_HCfNPzV3HUz8" \
-      -F "album_id=571758f88b1fcf0de2000004" \
+      -F "token=23xdaXnjRexaPyfqDsXs" \
+      -F "album_id=5746edf58b1fcf079c000001" \
+      -F "name=ttt" \
       -F "photo=@/Users/marcus/Documents/me1.jpg" \
       localhost:3000/api/v1/albums/upload_photo
 ==== Get Photos
@@ -97,4 +99,4 @@
     'token'       String,      *required
     'album_id'    String,      *required
   results
-    {id,photo}
+    success=>{id,photo:{[]}}
