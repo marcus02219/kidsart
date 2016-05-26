@@ -77,7 +77,7 @@ module Endpoints
         if user.present?
           photo = Photo.new(photo:params[:photo], album_id:params[:album_id], name:params[:name])
           if photo.save()
-            {:success => {photo_id:photo.id.to_s}}
+            {:success => photo.info_by_json}
           else
             {:failure => photo.errors.messages}
           end
