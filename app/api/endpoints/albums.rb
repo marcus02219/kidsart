@@ -77,7 +77,7 @@ module Endpoints
         if user.present?
           photo = Photo.new(photo:params[:photo], album_id:params[:album_id], name:params[:name])
           if photo.save()
-            {:success => photo.info_by_json}
+            {:success => {photo_id:photo.id.to_s}}
           else
             {:failure => photo.errors.messages}
           end
@@ -97,7 +97,7 @@ module Endpoints
         user = User.find_by_token params[:token]
         if user.present?
             album = Album.find(params[:album_id])
-            {:success => album.photos.map{|photo| photo.info_by_json}}
+            {:success => {photos:album.photos.map{|photo| photo.info_by_json}}}
         else
           {:failure => "Please sign"}
         end
