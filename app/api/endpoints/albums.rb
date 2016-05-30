@@ -27,7 +27,7 @@ module Endpoints
             {:failure => album.errors.messages}
           end
         else
-          {:failure => "Please sign"}
+          {:failure => "Please sign in"}
         end
       end
 
@@ -42,7 +42,7 @@ module Endpoints
         if user.present?
             {:success => {albums:user.albums_by_json}}
         else
-          {:failure => "Please sign"}
+          {:failure => "Please sign in"}
         end
       end
 
@@ -59,7 +59,28 @@ module Endpoints
             album = user.albums.find(params[:album_id])
             {:success => {album:album.info_by_json}}
         else
-          {:failure => "Please sign"}
+          {:failure => "Please sign in"}
+        end
+      end
+
+      # Delete Album
+      # DELETE: /api/v1/albums
+      # parameters:
+      #   token:      String *required
+      #   album_id:   String *required
+      # results:
+      #   return album id
+      delete do
+        user = User.find_by_token params[:token]
+        if user.present? and user.albums.count > 0
+          album = user.albums.find(params[:album_id])
+          if album.present? and album.delete
+            {:success => {album_id:album.id.to_s}}
+          else
+            {:failure => "Can't find album"}
+          end
+        else
+          {:failure => "Please sign in"}
         end
       end
 
@@ -82,7 +103,7 @@ module Endpoints
             {:failure => photo.errors.messages}
           end
         else
-          {:failure => "Please sign"}
+          {:failure => "Please sign in"}
         end
       end
 
@@ -99,10 +120,29 @@ module Endpoints
             album = Album.find(params[:album_id])
             {:success => {photos:album.photos.map{|photo| photo.info_by_json}}}
         else
-          {:failure => "Please sign"}
+          {:failure => "Please sign in"}
         end
       end
-
+      # Delete Photo
+      # DELETE: /api/v1/albums/photo
+      # parameters:
+      #   token:      String *required
+      #   photo_id:   String *required
+      # results:
+      #   return photo id
+      delete :photo do
+        user = User.find_by_token params[:token]
+        if user.present? and user.albums.count > 0
+          photo = Photo.find(params[:photo_id])
+          if photo.delete
+            {:success => {album_id:photo.id.to_s}}
+          else
+            {:failure => photo.errors.messages}
+          end
+        else
+          {:failure => "Please sign in"}
+        end
+      end
     end
   end
 end
