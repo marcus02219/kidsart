@@ -79,14 +79,14 @@
     ex: curl -X POST -H "Content-Type: application/json" http://localhost:3000/api/v1/albums -d '{"token":"dkzMxP9_HCfNPzV3HUz8","name":"album5"}'
 
 ==== Change Album name
-    POST: /api/v1/albums/change_name
+    POST: /api/v1/albums
     parameters:
       token:        String *required
       album_id:     String *required
       name:         String *required
     results:
       return album id
-    ex: curl -X PUT -H "Content-Type: application/json" http://localhost:3000/api/v1/albums/change_name -d '{"token":"23xdaXnjRexaPyfqDsXs","name":"album5", "album_id":"5746edee8b1fcf079c000000"}'
+    ex: curl -X PUT -H "Content-Type: application/json" http://localhost:3000/api/v1/albums -d '{"token":"23xdaXnjRexaPyfqDsXs","name":"album5", "album_id":"5746edee8b1fcf079c000000"}'
 ==== Delete Album
     DELETE: /api/v1/albums
     parameters:

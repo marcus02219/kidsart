@@ -31,14 +31,14 @@ module Endpoints
         end
       end
       # Change Album name
-      # POST: /api/v1/albums/change_name
+      # POST: /api/v1/albums
       # parameters:
       #   token:        String *required
       #   album_id:     String *required
       #   name:         String *required
       # results:
       #   return album id
-      post :change_name do
+      put do
         user = User.find_by_token params[:token]
         if user.present?
           album = user.albums.find(params[:album_id])
