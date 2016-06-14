@@ -30,7 +30,27 @@ module Endpoints
           {:failure => "Please sign in"}
         end
       end
-
+      # Change Album name
+      # PUT: /api/v1/albums
+      # parameters:
+      #   token:        String *required
+      #   album_id:     String *required
+      #   name:         String *required
+      # results:
+      #   return album id
+      put  do
+        user = User.find_by_token params[:token]
+        if user.present?
+          album = user.albums.find(params[:album_id])
+          if album.update(name: params[:name])
+            {:success => {album_id:album.id.to_s}}
+          else
+            {:failure => album.errors.messages}
+          end
+        else
+          {:failure => "Please sign in"}
+        end
+      end
       # Get Albums
       # GET: /api/v1/albums
       # parameters:
@@ -106,7 +126,28 @@ module Endpoints
           {:failure => "Please sign in"}
         end
       end
-
+      # Change Photo
+      # POST: /api/v1/albums/change_photo
+      # parameters:
+      #   token:      String *required
+      #   photo_id:   String *required
+      #   photo:      String *required
+      #   name:       String *optional
+      # results:
+      #   return album id
+      post :change_photo do
+        user = User.find_by_token params[:token]
+        if user.present?
+          photo = Photo.find_by_id(params[:photo_id])
+          if photo.update(photo: params[:photo], name: params[:name])
+            {:success => photo.info_by_json}
+          else
+            {:failure => photo.errors.messages}
+          end
+        else
+          {:failure => "Please sign in"}
+        end
+      end
       # Get Photos
       # GET: /api/v1/albums/photos
       # parameters:
