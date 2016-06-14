@@ -116,7 +116,7 @@
       parameters:
         token:      String *required
         photo_id:   String *required
-        photo:      String *required
+        photo:      File *required
         name:       String *optional
       results:
         return album id
