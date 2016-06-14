@@ -31,14 +31,14 @@ module Endpoints
         end
       end
       # Change Album name
-      # PUT: /api/v1/albums
+      # POST: /api/v1/albums/change_name
       # parameters:
       #   token:        String *required
       #   album_id:     String *required
       #   name:         String *required
       # results:
       #   return album id
-      put do
+      post :change_name do
         user = User.find_by_token params[:token]
         if user.present?
           album = user.albums.find(params[:album_id])
@@ -138,7 +138,7 @@ module Endpoints
       post :change_photo do
         user = User.find_by_token params[:token]
         if user.present?
-          photo = Photo.find_by_id(params[:photo_id])
+          photo = Photo.find(params[:photo_id])
           if photo.update(photo: params[:photo], name: params[:name])
             {:success => photo.info_by_json}
           else
