@@ -86,7 +86,7 @@
       name:         String *required
     results:
       return album id
-
+    ex: curl -X PUT -H "Content-Type: application/json" http://localhost:3000/api/v1/albums -d '{"token":"23xdaXnjRexaPyfqDsXs","name":"album5", "album_id":"5746edee8b1fcf079c000000"}'
 ==== Delete Album
     DELETE: /api/v1/albums
     parameters:

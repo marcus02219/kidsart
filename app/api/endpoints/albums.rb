@@ -17,7 +17,7 @@ module Endpoints
       #   name:       String *required
       # results:
       #   return album id
-      post  do
+      post do
         user = User.find_by_token params[:token]
         if user.present?
           album = Album.new(user:user, name:params[:name])
@@ -38,7 +38,7 @@ module Endpoints
       #   name:         String *required
       # results:
       #   return album id
-      put  do
+      put do
         user = User.find_by_token params[:token]
         if user.present?
           album = user.albums.find(params[:album_id])
