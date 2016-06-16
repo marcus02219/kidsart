@@ -79,7 +79,7 @@
     ex: curl -X POST -H "Content-Type: application/json" http://localhost:3000/api/v1/albums -d '{"token":"dkzMxP9_HCfNPzV3HUz8","name":"album5"}'
 
 ==== Change Album name
-    POST: /api/v1/albums
+    PUT: /api/v1/albums
     parameters:
       token:        String *required
       album_id:     String *required
