@@ -3,7 +3,7 @@ class Album
   include Mongoid::Timestamps
   field :name, type: String
   belongs_to :user
-  has_many :photos
+  has_many :photos, dependent: :destroy
 
   def time
     self.created_at.to_formatted_s

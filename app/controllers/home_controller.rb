@@ -78,7 +78,7 @@ class HomeController < ApplicationController
         user = sign_in( :user, resource )
         render :json => {:success => resource.info_by_json}
         else
-          render :json => {faild: params[:password]}, :status => 401
+          render :json => {faild: "Password is wrong"}, :status => 401
         end
       end
    end

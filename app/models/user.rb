@@ -44,7 +44,7 @@ class User
   acts_as_token_authenticatable
   field :authentication_token,      :type => String
 
-  has_many :albums
+  has_many :albums, dependent: :destroy
 
   def name
     [self.first_name, self.last_name].join(" ")
