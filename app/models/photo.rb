@@ -20,7 +20,7 @@ class Photo
       # if Rails.env.production?
       #   self.photo.url
       # else
-    		self.photo.url.gsub("#{Rails.root.to_s}/public/album/", "/album/")
+    		self.photo.url.gsub("#{Rails.root.to_s}/public/album/", "/public/album/")
       # end
   	end
   end
