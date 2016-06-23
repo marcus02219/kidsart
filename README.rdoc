@@ -107,8 +107,8 @@
     {photo_id}
   ex:
     curl \
-      -F "token=23xdaXnjRexaPyfqDsXs" \
-      -F "album_id=5746edee8b1fcf079c000000" \
+      -F "token=zfSnPC5iYaR37VrvpCdz" \
+      -F "album_id=5769e9a51d41c81063000002" \
       -F "name=ttt" \
       -F "photo=@/Users/marcus/Documents/data/me1.jpg" \
       -F "thumbnail=@/Users/marcus/Documents/data/me1.jpg" \
@@ -119,6 +119,7 @@
         token:      String *required
         photo_id:   String *required
         photo:      File *required
+        thumbnail:   File *required
         name:       String *optional
       results:
         return album id

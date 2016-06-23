@@ -133,6 +133,7 @@ module Endpoints
       #   token:      String *required
       #   photo_id:   String *required
       #   photo:      String *required
+      #   thumbnail:  String *required
       #   name:       String *optional
       # results:
       #   return album id
@@ -140,7 +141,7 @@ module Endpoints
         user = User.find_by_token params[:token]
         if user.present?
           photo = Photo.find(params[:photo_id])
-          if photo.update(photo: params[:photo], name: params[:name])
+          if photo.update(photo: params[:photo], thumbnail:params[:thumbnail], name: params[:name])
             {:success => photo.info_by_json}
           else
             {:failure => photo.errors.messages}
