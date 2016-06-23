@@ -106,11 +106,11 @@
     {photo_id}
   ex:
     curl \
-      -F "token=epJdPDyMyF8LN2HHXF81" \
-      -F "album_id=57697e2b1d41c80882000000" \
+      -F "token=23xdaXnjRexaPyfqDsXs" \
+      -F "album_id=5746edee8b1fcf079c000000" \
       -F "name=ttt" \
       -F "photo=@/Users/marcus/Documents/data/me1.jpg" \
-      http://198.58.105.103/api/v1/albums/upload_photo
+      http://localhost:3000/api/v1/albums/upload_photo
 ==== Change Photo
       POST: /api/v1/albums/change_photo
       parameters:

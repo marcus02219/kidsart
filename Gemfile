@@ -50,6 +50,7 @@ gem 'delayed_job_mongoid', :github => 'shkbahmad/delayed_job_mongoid'
 gem 'will_paginate_mongoid'
 # Use carrierwave for upload document and image
 gem 'carrierwave', :git => "git://github.com/jnicklas/carrierwave.git"
+gem 'mini_magick'
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
 # Use amazon service for image uploader
