@@ -110,13 +110,14 @@ module Endpoints
       #   token:      String *required
       #   album_id:   String *required
       #   photo:      String *required
+      #   thumbnail:  String *required
       #   name:       String *optional
       # results:
       #   return album id
       post :upload_photo do
         user = User.find_by_token params[:token]
         if user.present?
-          photo = Photo.new(photo:params[:photo], album_id:params[:album_id], name:params[:name])
+          photo = Photo.new(photo:params[:photo], thumbnail:params[:thumbnail], album_id:params[:album_id], name:params[:name])
           if photo.save()
             {:success => photo.info_by_json}
           else

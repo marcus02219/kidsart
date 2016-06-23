@@ -7,6 +7,7 @@ class Photo
 
   field :name,              :type => String
   field :photo,         		:type => String
+  field :thumbnail,         :type => String
 
   def time
     self.created_at.to_formatted_s
@@ -28,13 +29,13 @@ class Photo
   end
 
   def thumb_url
-    if self.photo.url.nil?
+    if self.thumbnail.url.nil?
   		""
   	else
       # if Rails.env.production?
       #   self.photo.url
       # else
-    		self.photo.thumb.url.gsub("#{Rails.root.to_s}/public/album/", "/public/album/")
+    		self.thumbnail.url.gsub("#{Rails.root.to_s}/public/album/", "/public/album/")
       # end
   	end
   end

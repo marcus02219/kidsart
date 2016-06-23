@@ -101,7 +101,8 @@
     'token'       String,      *required
     'album_id'    String,      *required
     'photo'       File,        *required
-    'name'        String,        *required
+    'thumbnail'   File,        *required
+    'name'        String,      *required
   results
     {photo_id}
   ex:
@@ -110,7 +111,8 @@
       -F "album_id=5746edee8b1fcf079c000000" \
       -F "name=ttt" \
       -F "photo=@/Users/marcus/Documents/data/me1.jpg" \
-      http://localhost:3000/api/v1/albums/upload_photo
+      -F "thumbnail=@/Users/marcus/Documents/data/me1.jpg" \
+      http://198.58.105.103/api/v1/albums/upload_photo
 ==== Change Photo
       POST: /api/v1/albums/change_photo
       parameters:
