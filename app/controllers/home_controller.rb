@@ -123,8 +123,11 @@ class HomeController < ApplicationController
       first_name   = params[:first_name]
       last_name    = params[:last_name]
 
-      user = User.any_of({:email=>email},{:user_auth_id => token}).first
+      puts "f_name -> #{first_name}"
+
+      user = User.any_of({:email=>email}).first
       if user.present?
+        user.update(first_name: first_name, last_name: last_name, user_auth_id: token)
         if sign_in(:user, user)
           render json: {:success => user.info_by_json}
         else
@@ -139,6 +142,7 @@ class HomeController < ApplicationController
               last_name:last_name,
               from_social:from_social,
               )
+          puts "uf_name->#{user.first_name}"
         if user.save
           if sign_in(:user, user)
             render json: {:success => user.info_by_json}

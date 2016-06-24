@@ -57,8 +57,8 @@ class User
     user = self
     user_info={
       id:user.id.to_s,
-      first_name:user.first_name,
-      last_name:user.last_name,
+      first_name:user.first_name == nil ? "" : user.first_name,
+      last_name:user.last_name == nil ? "" : user.last_name,
       email:user.email,
       auth_id:user.user_auth_id == nil ? "" : user.user_auth_id,
       token:user.authentication_token,
