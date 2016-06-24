@@ -31,7 +31,7 @@
 
 ==== Sign In(from social)
 
-    POST: /api/v1/accounts/create
+    POST: /api/v1/accounts/social_sign_in
 
     parameters accepted
       'email'         String,      *required
@@ -40,7 +40,7 @@
       'social'        String,      *required(facebook, twitter, google)
     results:
       {id,user_name,email,token, auth_id,social, avatar, state, phone}
-
+    ex: curl -X POST -H "Content-Type: application/json" http://localhost:3000/api/v1/accounts/social_sign_in -d '{"email":"facebook@email.com","token":"asdfasdfasdfasdf", "social":"facebook"}'
 ==== Sign Out
     POST: 'api/v1/accounts/sign_out'
 

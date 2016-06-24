@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   post 'api/v1/accounts/destroy'        => 'home#destroy'
 
   post 'api/v1/accounts/sign_in'        => 'home#create_session'
+  post 'api/v1/accounts/social_sign_in' => 'home#social_sign_in'
+
   post 'api/v1/accounts/sign_out'       => 'home#delete_session'
   post 'api/v1/accounts/create_account' => 'home#create_account'
 end
