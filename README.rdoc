@@ -34,10 +34,11 @@
     POST: /api/v1/accounts/social_sign_in
 
     parameters accepted
-      'email'         String,      *required
-      'user_name'     String,      optional
-      'token'         String,      *requried (facebook uid)
-      'social'        String,      *required(facebook, twitter, google)
+      email:        String *required
+      social:       String *required
+      toke:         String *required
+      first_name:   String *required
+      last_name:    String *required      
     results:
       {id,user_name,email,token, auth_id,social, avatar, state, phone}
     ex:
