@@ -52,7 +52,7 @@
 
 
 ==== Forgotten Password
-    GET: /api/v1/accounts/forgotten_password
+    GET: /api/v1/accounts/forgot_password
     parameters accepted
       'email'     String,       *required
     results:
