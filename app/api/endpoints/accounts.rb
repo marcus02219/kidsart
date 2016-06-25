@@ -10,7 +10,22 @@ module Endpoints
         { :ping => 'gwangming' }
       end
 
-      
+      # Reset Password
+      # GET: /api/v1/accounts/forgot_password
+      # parameters:
+      #   email:      String *required
+      # results:
+      #   return album id
+      get :forgot_password do
+        puts "---->#{params[:email]}"
+        user = User.where(email:params[:email]).first
+        if user.present?
+          user.send_reset_password_instructions
+          {success: 'Email was sent successfully'}
+        else
+          {:failure => 'Cannot find your email'}
+        end
+      end
 
     end
   end

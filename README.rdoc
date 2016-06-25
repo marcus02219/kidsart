@@ -38,7 +38,7 @@
       social:       String *required
       toke:         String *required
       first_name:   String *required
-      last_name:    String *required      
+      last_name:    String *required
     results:
       {id,user_name,email,token, auth_id,social, avatar, state, phone}
     ex:
