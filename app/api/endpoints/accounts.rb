@@ -17,7 +17,6 @@ module Endpoints
       # results:
       #   return album id
       get :forgot_password do
-        puts "---->#{params[:email]}"
         user = User.where(email:params[:email]).first
         if user.present?
           user.send_reset_password_instructions
