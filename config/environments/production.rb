@@ -88,23 +88,9 @@ Rails.application.configure do
   #   domain: "198.58.105.103",
   #   authentication: "plain",
   #   enable_starttls_auto: true,
-  #   user_name: "AKIAIVUF5Q7TJQ6DXUKA",
-  #   password: "AqImlMTjZxHuLRGZGIRpwsCQrs5McnTAsXvEp/9YwJM+"
+  #   user_name: ENV["AWS_SES_USER_ID"],
+  #   password: ENV["AWS_SES_PSWD_ID"]
   # }
 
-  # AWSAccessKeyId=AKIAIAVSQEQ4UGJZ6T6Q
-  # AWSSecretKey=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
-  #
-  # ses = AWS::SES::Base.new(
-  # :access_key_id     => 'AKIAIAVSQEQ4UGJZ6T6Q',
-  # :secret_access_key => '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',
-  # )
-  #
-  # ses.send_email(
-  #  :to        => ['marcus02219@yahoo.com', 'lionel02218@yahoo.com'],
-  #  :source    => '"Steve Smith" <gentle0219@gmail.com>',
-  #  :subject   => 'Subject Line',
-  #  :text_body => 'Internal text body'
-  # )
 
 end
