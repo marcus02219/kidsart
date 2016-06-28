@@ -36,8 +36,7 @@ Rails.application.configure do
   config.assets.digest = true
   config.assets.paths << Rails.root.join("public", "assets", "flash")
   config.assets.compile = true
-  config.assets.precompile =  ['*.js', '*.css', '*.css.erb']
-
+  
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Specifies the header that your server uses for sending files.
