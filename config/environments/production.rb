@@ -77,19 +77,34 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { :host => "198.58.105.103" }
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.delivery_method = :ses
+  # config.action_mailer.perform_deliveries = true
+  # config.action_mailer.raise_delivery_errors = false
+  # config.action_mailer.default :charset => "utf-8"
+  #
+  # config.action_mailer.smtp_settings = {
+  #   address: "email-smtp.us-east-1.amazonaws.com",
+  #   port: 587,
+  #   domain: "198.58.105.103",
+  #   authentication: "plain",
+  #   enable_starttls_auto: true,
+  #   user_name: "AKIAIVUF5Q7TJQ6DXUKA",
+  #   password: "AqImlMTjZxHuLRGZGIRpwsCQrs5McnTAsXvEp/9YwJM+"
+  # }
 
-  config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "198.58.105.103",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: "huawan028@gmail.com",
-    password: "Hua0208Jong"
-  }
+  # AWSAccessKeyId=AKIAIAVSQEQ4UGJZ6T6Q
+  # AWSSecretKey=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
+  #
+  # ses = AWS::SES::Base.new(
+  # :access_key_id     => 'AKIAIAVSQEQ4UGJZ6T6Q',
+  # :secret_access_key => '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',
+  # )
+  #
+  # ses.send_email(
+  #  :to        => ['marcus02219@yahoo.com', 'lionel02218@yahoo.com'],
+  #  :source    => '"Steve Smith" <gentle0219@gmail.com>',
+  #  :subject   => 'Subject Line',
+  #  :text_body => 'Internal text body'
+  # )
 
 end

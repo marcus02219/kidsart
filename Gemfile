@@ -55,6 +55,7 @@ gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 
 # Use amazon service for image uploader
 gem 'aws-sdk'
+gem 'aws-ses'
 gem 'fog'
 gem 'unf'
 #gem 'rmagick'

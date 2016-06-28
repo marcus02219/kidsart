@@ -77,6 +77,11 @@ GEM
       jmespath (~> 1.0)
     aws-sdk-resources (2.2.35)
       aws-sdk-core (= 2.2.35)
+    aws-ses (0.6.0)
+      builder
+      mail (> 2.2.5)
+      mime-types
+      xml-simple
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -509,6 +514,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk
+  aws-ses
   bootstrap-sass
   byebug
   capistrano
